@@ -66,9 +66,9 @@ export function FeaturesSection() {
           <div className="hidden md:block lg:col-span-7">
             <div className="relative w-auto overflow-hidden rounded-2xl md:h-[28rem] md:w-[32rem] md:border md:shadow-2xl lg:w-[46rem] xl:h-[50rem] xl:w-[69rem] 2xl:h-[48rem] 2xl:w-[67rem]">
               <Image
-                src={activeFeature ? activeFeature.image : ""}
+                src={activeFeature?.image || "/images/features/authentication.png"}
                 fill
-                alt={activeFeature ? activeFeature.title : ""}
+                alt={activeFeature?.title || "Feature image"}
                 className="size-full object-cover object-center"
               />
             </div>
