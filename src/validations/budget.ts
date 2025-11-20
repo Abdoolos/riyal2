@@ -4,7 +4,7 @@ import { z } from "zod"
  * Schema لإنشاء ميزانية جديدة
  */
 export const createBudgetSchema = z.object({
-  categoryId: z.string().min(1, "يجب اختيار فئة"),
+  categoryId: z.number().int().positive("يجب اختيار فئة"),
   monthlyAmount: z.number().positive("المبلغ الشهري يجب أن يكون موجباً"),
 })
 
@@ -19,7 +19,7 @@ export const updateBudgetSchema = z.object({
  * Schema لمعاملات الاستعلام
  */
 export const getBudgetsQuerySchema = z.object({
-  categoryId: z.string().optional(),
+  categoryId: z.number().int().positive().optional(),
 })
 
 /**
