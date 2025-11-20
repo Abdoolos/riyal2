@@ -88,10 +88,7 @@ export async function getExpenseStats(userId: string): Promise<{
     // المصاريف حسب الفئة
     const byCategory: Record<number, number> = {}
     allExpenses.forEach((expense) => {
-      if (!byCategory[expense.categoryId]) {
-        byCategory[expense.categoryId] = 0
-      }
-      byCategory[expense.categoryId] += expense.amount
+      byCategory[expense.categoryId] = (byCategory[expense.categoryId] ?? 0) + expense.amount
     })
 
     // هذا الشهر
@@ -175,11 +172,11 @@ export async function getTopSpendingCategories(
     const categoryTotals: Record<number, { total: number; count: number }> = {}
 
     expenses.forEach((expense) => {
-      if (!categoryTotals[expense.categoryId]) {
-        categoryTotals[expense.categoryId] = { total: 0, count: 0 }
+      const current = categoryTotals[expense.categoryId] ?? { total: 0, count: 0 }
+      categoryTotals[expense.categoryId] = {
+        total: current.total + expense.amount,
+        count: current.count + 1,
       }
-      categoryTotals[expense.categoryId]!.total += expense.amount
-      categoryTotals[expense.categoryId]!.count += 1
     })
 
     const sorted = Object.entries(categoryTotals)
