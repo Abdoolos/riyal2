@@ -149,8 +149,8 @@ export interface AnalyticsData {
     growthRate: number
   }
   categories: Array<{
-    categoryId: string
-    categoryName: string
+    categoryId: number
+    categoryName: number | string
     amount: number
     budget: number
     percentage: number

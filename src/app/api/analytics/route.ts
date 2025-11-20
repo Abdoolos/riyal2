@@ -69,7 +69,8 @@ export async function GET(req: NextRequest) {
 
     // حساب الفئات مع الميزانيات والاتجاهات
     const categories = await Promise.all(
-      Object.entries(expensesByCategory).map(async ([categoryId, data]) => {
+      Object.entries(expensesByCategory).map(async ([categoryIdStr, data]) => {
+        const categoryId = parseInt(categoryIdStr)
         const budget = allBudgets.find((b) => b.categoryId === categoryId)
         const budgetAmount = budget?.monthlyAmount || 0
         const percentage = budgetAmount > 0 ? (data.amount / budgetAmount) * 100 : 0
