@@ -5,7 +5,7 @@ import { prisma } from "@/config/db"
  */
 export async function createBudgetAlert(
   userId: string,
-  categoryId: string,
+  categoryId: number,
   budgetId: string,
   percentage: number
 ): Promise<void> {
