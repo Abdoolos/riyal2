@@ -1,11 +1,13 @@
 import { prisma } from "@/config/db"
 
+type CategoryId = number
+
 /**
  * حساب استخدام الميزانية
  */
 export async function calculateBudgetUsage(
   userId: string,
-  categoryId: number
+  categoryId: CategoryId
 ): Promise<{
   budget: number
   spent: number
@@ -18,7 +20,7 @@ export async function calculateBudgetUsage(
       where: {
         userId_categoryId: {
           userId,
-          categoryId: Number(categoryId),
+          categoryId: categoryId as number,
         },
       },
     })
@@ -33,7 +35,7 @@ export async function calculateBudgetUsage(
     const expenses = await prisma.expense.findMany({
       where: {
         userId,
-        categoryId: categoryId,
+        categoryId: categoryId as number,
         date: { gte: startOfMonth },
       },
     })
