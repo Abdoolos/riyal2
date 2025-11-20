@@ -58,13 +58,13 @@ export async function GET(req: NextRequest) {
       : 0
 
     // المصاريف حسب الفئة
-    const expensesByCategory: Record<string, { amount: number; count: number }> = {}
+    const expensesByCategory: Record<number, { amount: number; count: number }> = {}
     thisMonthExpenses.forEach((expense) => {
       if (!expensesByCategory[expense.categoryId]) {
         expensesByCategory[expense.categoryId] = { amount: 0, count: 0 }
       }
-      expensesByCategory[expense.categoryId].amount += expense.amount
-      expensesByCategory[expense.categoryId].count += 1
+      expensesByCategory[expense.categoryId]!.amount += expense.amount
+      expensesByCategory[expense.categoryId]!.count += 1
     })
 
     // حساب الفئات مع الميزانيات والاتجاهات
