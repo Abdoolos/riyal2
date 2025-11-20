@@ -5,7 +5,7 @@ import { prisma } from "@/config/db"
  */
 export async function calculateBudgetUsage(
   userId: string,
-  categoryId: string
+  categoryId: number
 ): Promise<{
   budget: number
   spent: number
@@ -33,7 +33,7 @@ export async function calculateBudgetUsage(
     const expenses = await prisma.expense.findMany({
       where: {
         userId,
-        categoryId,
+        categoryId: categoryId,
         date: { gte: startOfMonth },
       },
     })
