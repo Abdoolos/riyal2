@@ -6,7 +6,7 @@ import type { Expense } from "@prisma/client"
  */
 export async function getExpensesByCategory(
   userId: string,
-  categoryId: string
+  categoryId: number
 ): Promise<Expense[]> {
   try {
     const expenses = await prisma.expense.findMany({
@@ -63,7 +63,7 @@ export async function getExpenseStats(userId: string): Promise<{
   total: number
   count: number
   average: number
-  byCategory: Record<string, number>
+  byCategory: Record<number, number>
   thisMonth: number
   lastMonth: number
   thisWeek: number
@@ -86,7 +86,7 @@ export async function getExpenseStats(userId: string): Promise<{
     const average = count > 0 ? total / count : 0
 
     // المصاريف حسب الفئة
-    const byCategory: Record<string, number> = {}
+    const byCategory: Record<number, number> = {}
     allExpenses.forEach((expense) => {
       if (!byCategory[expense.categoryId]) {
         byCategory[expense.categoryId] = 0
@@ -166,13 +166,13 @@ export async function getExpenseStats(userId: string): Promise<{
 export async function getTopSpendingCategories(
   userId: string,
   limit: number = 5
-): Promise<Array<{ categoryId: string; total: number; count: number }>> {
+): Promise<Array<{ categoryId: number; total: number; count: number }>> {
   try {
     const expenses = await prisma.expense.findMany({
       where: { userId },
     })
 
-    const categoryTotals: Record<string, { total: number; count: number }> = {}
+    const categoryTotals: Record<number, { total: number; count: number }> = {}
 
     expenses.forEach((expense) => {
       if (!categoryTotals[expense.categoryId]) {
@@ -184,7 +184,7 @@ export async function getTopSpendingCategories(
 
     const sorted = Object.entries(categoryTotals)
       .map(([categoryId, data]) => ({
-        categoryId,
+        categoryId: Number(categoryId),
         total: data.total,
         count: data.count,
       }))
