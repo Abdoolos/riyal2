@@ -56,7 +56,7 @@ export async function getUserBudgets(userId: string): Promise<Budget[]> {
  * إنشاء ميزانية جديدة
  */
 export async function createBudget(data: {
-  categoryId: string
+  categoryId: number
   monthlyAmount: number
 }): Promise<{ success: boolean; budget?: Budget; error?: string }> {
   try {
