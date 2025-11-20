@@ -56,7 +56,7 @@ export async function getUserExpenses(userId: string): Promise<Expense[]> {
  * إنشاء مصروف جديد
  */
 export async function createExpense(data: {
-  categoryId: string
+  categoryId: number
   amount: number
   description?: string
   date?: Date
@@ -109,7 +109,7 @@ export async function createExpense(data: {
 export async function updateExpense(
   id: string,
   data: Partial<{
-    categoryId: string
+    categoryId: number
     amount: number
     description: string
     date: Date
