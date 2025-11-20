@@ -18,7 +18,7 @@ export async function calculateBudgetUsage(
       where: {
         userId_categoryId: {
           userId,
-          categoryId,
+          categoryId: Number(categoryId),
         },
       },
     })
