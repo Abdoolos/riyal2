@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server"
-import prisma from "@/config/db"
+import { prisma } from "@/config/db"
 import { getAuthSession, handleApiError, successResponse } from "@/lib/api-utils"
 
 // PUT /api/notifications/read-all - تحديد جميع الإشعارات كمقروءة

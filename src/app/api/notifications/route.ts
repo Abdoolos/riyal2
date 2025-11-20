@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server"
-import prisma from "@/config/db"
+import { prisma } from "@/config/db"
 import { getAuthSession, handleApiError, successResponse } from "@/lib/api-utils"
 import { getNotificationsQuerySchema } from "@/validations/notification"
 

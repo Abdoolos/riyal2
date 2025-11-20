@@ -1,7 +1,7 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
-import prisma from "@/config/db"
+import { prisma } from "@/config/db"
 import { auth } from "@/auth"
 import type { Expense } from "@prisma/client"
 

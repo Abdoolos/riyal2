@@ -1,4 +1,4 @@
-import prisma from "@/config/db"
+import { prisma } from "@/config/db"
 
 /**
  * إنشاء تنبيه ميزانية عند تجاوز النسبة المحددة
