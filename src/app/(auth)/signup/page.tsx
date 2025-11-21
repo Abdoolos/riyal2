@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
@@ -17,6 +17,9 @@ import { OAuthButtons } from "@/components/auth/oauth-buttons"
 import { SignInWithEmailForm } from "@/components/forms/signin-with-email-form"
 import { SignUpWithPasswordForm } from "@/components/forms/signup-with-password-form"
 import { Icons } from "@/components/icons"
+
+// Force dynamic rendering
+export const dynamic = 'force-dynamic'
 
 export default function SignUpPage() {
   const { data: session } = useSession()
