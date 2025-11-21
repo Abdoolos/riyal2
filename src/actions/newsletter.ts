@@ -10,7 +10,7 @@ import {
   type NewsletterSignUpFormInput,
 } from "@/validations/newsletter"
 
-import { NewsletterWelcomeEmail } from "@/components/emails/newsletter-welcome-email"
+// import { NewsletterWelcomeEmail } from "@/components/emails/newsletter-welcome-email"
 
 export async function checkIfSubscribedToNewsletter(
   rawInput: CheckIfSubscribedToNewsletterInput
@@ -48,14 +48,15 @@ export async function subscribeToNewsletter(
       data: { email: validatedInput.data.email },
     })
 
-    const emailSent = await resend.emails.send({
-      from: env.RESEND_EMAIL_FROM,
-      to: validatedInput.data.email,
-      subject: "Welcome to our newsletter!",
-      react: NewsletterWelcomeEmail(),
-    })
+    // Email sending temporarily disabled
+    // const emailSent = await resend.emails.send({
+    //   from: env.RESEND_EMAIL_FROM,
+    //   to: validatedInput.data.email,
+    //   subject: "Welcome to our newsletter!",
+    //   react: NewsletterWelcomeEmail(),
+    // })
 
-    return newSubscriber && emailSent ? "success" : "error"
+    return newSubscriber ? "success" : "error"
   } catch (error) {
     console.error(error)
     throw new Error("Error subscribing to the newsletter")
