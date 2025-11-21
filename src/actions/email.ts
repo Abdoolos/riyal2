@@ -18,8 +18,8 @@ import {
   type MarkEmailAsVerifiedInput,
 } from "@/validations/email"
 
-import { EmailVerificationEmail } from "@/components/emails/email-verification-email"
-import { NewEnquiryEmail } from "@/components/emails/new-enquiry-email"
+// import { EmailVerificationEmail } from "@/components/emails/email-verification-email"
+// import { NewEnquiryEmail } from "@/components/emails/new-enquiry-email"
 
 export async function resendEmailVerificationLink(
   rawInput: EmailVerificationFormInput
@@ -42,17 +42,18 @@ export async function resendEmailVerificationLink(
       },
     })
 
-    const emailSent = await resend.emails.send({
-      from: env.RESEND_EMAIL_FROM,
-      to: [validatedInput.data.email],
-      subject: "Verify your email address",
-      react: EmailVerificationEmail({
-        email: validatedInput.data.email,
-        emailVerificationToken,
-      }),
-    })
+    // Email sending temporarily disabled
+    // const emailSent = await resend.emails.send({
+    //   from: env.RESEND_EMAIL_FROM,
+    //   to: [validatedInput.data.email],
+    //   subject: "Verify your email address",
+    //   react: EmailVerificationEmail({
+    //     email: validatedInput.data.email,
+    //     emailVerificationToken,
+    //   }),
+    // })
 
-    return userUpdated && emailSent ? "success" : "error"
+    return userUpdated ? "success" : "error"
   } catch (error) {
     console.error(error)
     throw new Error("Error resending email verification link")
@@ -105,18 +106,19 @@ export async function submitContactForm(
     const validatedInput = contactFormSchema.safeParse(rawInput)
     if (!validatedInput.success) return "error"
 
-    const emailSent = await resend.emails.send({
-      from: env.RESEND_EMAIL_FROM,
-      to: env.RESEND_EMAIL_TO,
-      subject: "Exciting news! New enquiry awaits",
-      react: NewEnquiryEmail({
-        name: validatedInput.data.name,
-        email: validatedInput.data.email,
-        message: validatedInput.data.message,
-      }),
-    })
+    // Email sending temporarily disabled
+    // const emailSent = await resend.emails.send({
+    //   from: env.RESEND_EMAIL_FROM,
+    //   to: env.RESEND_EMAIL_TO,
+    //   subject: "Exciting news! New enquiry awaits",
+    //   react: NewEnquiryEmail({
+    //     name: validatedInput.data.name,
+    //     email: validatedInput.data.email,
+    //     message: validatedInput.data.message,
+    //   }),
+    // })
 
-    return emailSent ? "success" : "error"
+    return "success"
   } catch (error) {
     console.error(error)
     throw new Error("Error submitting contact form")
