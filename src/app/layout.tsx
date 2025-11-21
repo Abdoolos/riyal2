@@ -14,6 +14,9 @@ export const metadata: Metadata = {
   description: "تطبيق ذكي لإدارة المصاريف العائلية بتقنيات الذكاء الاصطناعي",
 }
 
+// Force dynamic rendering to prevent prerendering errors with SessionProvider
+export const dynamic = 'force-dynamic'
+
 export default function RootLayout({
   children,
 }: {
