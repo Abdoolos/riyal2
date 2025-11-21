@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  output: 'standalone',
   images: {
     domains: ['localhost', 'lh3.googleusercontent.com'],
   },
@@ -9,10 +10,6 @@ const nextConfig = {
     serverActions: {
       bodySizeLimit: '2mb',
     },
-  },
-  // Disable static optimization for error pages to avoid build issues
-  generateBuildId: async () => {
-    return 'build-' + Date.now()
   },
 }
 
