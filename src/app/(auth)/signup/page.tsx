@@ -1,127 +1,63 @@
 "use client"
 
-import { useEffect, Suspense } from "react"
-import { useSession } from "next-auth/react"
-import { useRouter } from "next/navigation"
 import Link from "next/link"
-
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { OAuthButtons } from "@/components/auth/oauth-buttons"
-import { SignInWithEmailForm } from "@/components/forms/signin-with-email-form"
-import { SignUpWithPasswordForm } from "@/components/forms/signup-with-password-form"
 import { Icons } from "@/components/icons"
 
 // Force dynamic rendering
 export const dynamic = 'force-dynamic'
 
 export default function SignUpPage() {
-  const { data: session } = useSession()
-  const router = useRouter()
-
-  // Redirect if already logged in
-  useEffect(() => {
-    if (session) {
-      router.push("/dashboard")
-    }
-  }, [session, router])
-
   return (
     <div className="flex h-auto min-h-screen w-full items-center justify-center md:flex">
-      <Card className="max-sm:flex max-sm:w-full max-sm:flex-col max-sm:items-center max-sm:justify-center max-sm:rounded-none max-sm:border-none sm:min-w-[370px] sm:max-w-[368px]">
-        <CardHeader className="space-y-1">
-          <div className="flex items-center justify-between">
-            <CardTitle className="text-2xl">تسجيل حساب جديد</CardTitle>
-            <Link href="/">
+      <Card className="max-sm:flex max-sm:w-full max-sm:flex-col max-sm:items-center max-sm:justify-center max-sm:rounded-none max-sm:border-none sm:min-w-[370px] sm:max-w-[450px]">
+        <CardHeader className="space-y-1 text-center">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex-1" />
+            <Link href="/" className="hover:opacity-70 transition-opacity">
               <Icons.close className="size-4" />
             </Link>
           </div>
-          <CardDescription>
-            اختر طريقة التسجيل المفضلة لديك
+          <div className="flex justify-center mb-4">
+            <div className="rounded-full bg-primary/10 p-4">
+              <Icons.settings className="size-12 text-primary" />
+            </div>
+          </div>
+          <CardTitle className="text-3xl">التسجيل معطل مؤقتاً</CardTitle>
+          <CardDescription className="text-base pt-2">
+            نعمل حالياً على تحسين نظام التسجيل لتوفير أفضل تجربة لك
           </CardDescription>
         </CardHeader>
-        <CardContent className="max-sm:w-full max-sm:max-w-[340px] max-sm:px-10">
-          <OAuthButtons />
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
-            </div>
-            <div className="relative mb-3 mt-6 flex justify-center text-xs uppercase">
-              <span className="bg-background px-2">
-                أو التسجيل بالبريد الإلكتروني
-              </span>
-            </div>
+        <CardContent className="max-sm:w-full max-sm:max-w-[340px] max-sm:px-10 text-center space-y-6">
+          <div className="bg-muted/50 rounded-lg p-4 space-y-2">
+            <p className="text-sm text-muted-foreground">
+              سيتم تفعيل التسجيل قريباً جداً
+            </p>
+            <p className="text-xs text-muted-foreground">
+              نقدر تفهمك وصبرك معنا
+            </p>
           </div>
-          <Suspense fallback={<div className="h-20 animate-pulse bg-muted rounded" />}>
-            <SignInWithEmailForm />
-          </Suspense>
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
-            </div>
-            <div className="relative mb-3 mt-6 flex justify-center text-xs uppercase">
-              <span className="bg-background px-2">
-                أو التسجيل بكلمة مرور
-              </span>
-            </div>
+          
+          <div className="space-y-3">
+            <Button asChild className="w-full" size="lg">
+              <Link href="/signin">
+                تسجيل الدخول
+              </Link>
+            </Button>
+            <Button asChild variant="outline" className="w-full" size="lg">
+              <Link href="/">
+                العودة للرئيسية
+              </Link>
+            </Button>
           </div>
-          <SignUpWithPasswordForm />
         </CardContent>
-        <CardFooter className="grid w-full gap-4 text-sm text-muted-foreground max-sm:max-w-[340px] max-sm:px-10">
-          <div>
-            <div>
-              <span> لديك حساب بالفعل؟ </span>
-              <Link
-                aria-label="Sign in"
-                href="/signin"
-                className="font-bold tracking-wide text-primary underline-offset-4 transition-all hover:underline"
-              >
-                سجل دخول
-                <span className="sr-only">تسجيل الدخول</span>
-              </Link>
-              .
-            </div>
-            <div>
-              <span>فقدت رابط التحقق من البريد؟ </span>
-              <Link
-                aria-label="Resend email verification link"
-                href="/signup/reverify-email"
-                className="text-sm font-normal text-primary underline-offset-4 transition-colors hover:underline"
-              >
-                إعادة إرسال
-                <span className="sr-only">إعادة إرسال رابط التحقق</span>
-              </Link>
-              .
-            </div>
-          </div>
-
-          <div className="text-sm text-muted-foreground md:text-xs">
-            بالمتابعة، أنت توافق على{" "}
-            <Link
-              aria-label="Terms of Service"
-              href="/tos"
-              className="font-semibold underline-offset-4 transition-all hover:underline"
-            >
-              شروط الخدمة
-            </Link>{" "}
-            <br className="xs:hidden sm:block md:hidden" />
-            و
-            <Link
-              aria-label="Privacy Policy"
-              href="/privacy"
-              className="font-semibold underline-offset-4 transition-all hover:underline"
-            >
-              {" "}سياسة الخصوصية
-            </Link>
-            .
-          </div>
-        </CardFooter>
       </Card>
     </div>
   )
