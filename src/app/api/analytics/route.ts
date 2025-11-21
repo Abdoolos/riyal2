@@ -3,6 +3,9 @@ import { prisma } from "@/config/db"
 import { getAuthSession, handleApiError, successResponse } from "@/lib/api-utils"
 import type { AnalyticsData } from "@/types/api"
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic'
+
 // GET /api/analytics - الحصول على بيانات التحليلات الشاملة
 export async function GET(req: NextRequest) {
   try {
