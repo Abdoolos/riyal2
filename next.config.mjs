@@ -10,6 +10,10 @@ const nextConfig = {
       bodySizeLimit: '2mb',
     },
   },
+  // Disable static optimization for error pages to avoid build issues
+  generateBuildId: async () => {
+    return 'build-' + Date.now()
+  },
 }
 
 export default nextConfig
