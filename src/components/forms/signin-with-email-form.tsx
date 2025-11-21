@@ -29,6 +29,7 @@ export function SignInWithEmailForm(): JSX.Element {
   const searchParams = useSearchParams()
   const { toast } = useToast()
   const [isPending, startTransition] = React.useTransition()
+  const error = searchParams?.get("error")
 
   const form = useForm<SignInWithEmailFormInput>({
     resolver: zodResolver(signInWithEmailSchema),
@@ -41,10 +42,10 @@ export function SignInWithEmailForm(): JSX.Element {
     startTransition(async () => {
       try {
         await signIn("resend", { email: formData.email })
-      } catch (error) {
-        console.error(error)
+      } catch (err) {
+        console.error(err)
 
-        searchParams.get("error") === "OAuthAccountNotLinked"
+        error === "OAuthAccountNotLinked"
           ? toast({
               title: "Email already in use with another provider",
               description: "Perhaps you signed up with another method?",
