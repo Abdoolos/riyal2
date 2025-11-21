@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, Suspense } from "react"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
@@ -58,7 +58,9 @@ export default function SignUpPage() {
               </span>
             </div>
           </div>
-          <SignInWithEmailForm />
+          <Suspense fallback={<div className="h-20 animate-pulse bg-muted rounded" />}>
+            <SignInWithEmailForm />
+          </Suspense>
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t" />
