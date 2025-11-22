@@ -108,17 +108,11 @@ export default function HomePage() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href="/auth/signin"
+              href="/dashboard"
               className="w-full sm:w-auto bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:from-green-600 hover:to-emerald-700 transition-all shadow-xl hover:shadow-2xl flex items-center justify-center gap-2"
             >
-              ابدأ مجاناً الآن
+              جرب التطبيق الآن
               <ArrowLeft className="w-5 h-5" />
-            </Link>
-            <Link
-              href="/dashboard"
-              className="w-full sm:w-auto border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-xl font-bold text-lg hover:border-gray-400 hover:bg-gray-50 transition-all"
-            >
-              جرب الوضع التجريبي
             </Link>
           </div>
         </div>
@@ -218,14 +212,14 @@ export default function HomePage() {
                   ))}
                 </ul>
                 <Link
-                  href="/auth/signin"
+                  href="/dashboard"
                   className={`block text-center py-3.5 rounded-xl font-bold transition-all ${
                     plan.popular
                       ? "bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700 shadow-lg"
                       : "bg-gray-900 text-white hover:bg-gray-800"
                   }`}
                 >
-                  اشترك الآن
+                  جرب الآن
                 </Link>
               </div>
             ))}
@@ -247,10 +241,10 @@ export default function HomePage() {
             انضم لآلاف العائلات التي تدير مصاريفها بكفاءة مع ريال مايند
           </p>
           <Link
-            href="/auth/signin"
+            href="/dashboard"
             className="inline-block bg-white text-green-600 px-10 py-4 rounded-xl font-bold text-lg hover:bg-gray-50 transition-all shadow-2xl"
           >
-            ابدأ مجاناً الآن
+            جرب التطبيق الآن
           </Link>
         </div>
       </section>
