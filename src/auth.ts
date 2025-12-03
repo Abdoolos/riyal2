@@ -1,9 +1,16 @@
 import { linkOAuthAccount } from "@/actions/auth"
+import { getUserByEmail } from "@/actions/user"
 import { PrismaAdapter } from "@auth/prisma-adapter"
+import bcryptjs from "bcryptjs"
 import NextAuth from "next-auth"
+import CredentialsProvider from "next-auth/providers/credentials"
+import Google from "next-auth/providers/google"
 
-import authConfig from "@/config/auth"
 import { prisma } from "@/config/db"
+import { signInWithPasswordSchema } from "@/validations/auth"
+
+console.log("🔍 Auth: GOOGLE_ID =", process.env.GOOGLE_ID?.substring(0, 20))
+console.log("🔍 Auth: GOOGLE_SECRET exists =", !!process.env.GOOGLE_SECRET)
 
 export const {
   handlers: { GET, POST },
@@ -11,7 +18,32 @@ export const {
   signIn,
   signOut,
 } = NextAuth({
-  debug: process.env.NODE_ENV === "development",
+  debug: true,
+  providers: [
+    Google,
+    CredentialsProvider({
+      async authorize(rawCredentials) {
+        const validatedCredentials =
+          signInWithPasswordSchema.safeParse(rawCredentials)
+
+        if (validatedCredentials.success) {
+          const user = await getUserByEmail({
+            email: validatedCredentials.data.email,
+          })
+          if (!user || !user.passwordHash) return null
+
+          const passwordIsValid = await bcryptjs.compare(
+            validatedCredentials.data.password,
+            user.passwordHash
+          )
+
+          if (passwordIsValid) return user
+        }
+        return null
+      },
+    }),
+  ],
+  adapter: PrismaAdapter(prisma),
   pages: {
     signIn: "/signin",
     error: "/signin",
@@ -19,8 +51,8 @@ export const {
   secret: process.env.AUTH_SECRET,
   session: {
     strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60, // 30 days
-    updateAge: 24 * 60 * 60, // 24 hours
+    maxAge: 30 * 24 * 60 * 60,
+    updateAge: 24 * 60 * 60,
   },
   events: {
     async linkAccount({ user }) {
@@ -28,7 +60,7 @@ export const {
     },
   },
   callbacks: {
-    jwt({ token, user, account }) {
+    jwt({ token, user }) {
       if (user) {
         token.role = user.role
         token.id = user.id
@@ -42,13 +74,26 @@ export const {
       }
       return session
     },
-    async signIn({ user, account }) {
-      if (!user.id) return false
-      if (account?.provider !== "credentials") return true
-
-      return true // Allow sign in
+    async signIn({ user, account, profile }) {
+      console.log("🔍 signIn callback:", { 
+        userId: user?.id, 
+        provider: account?.provider,
+        email: user?.email,
+        profileEmail: (profile as any)?.email
+      })
+      
+      // للمستخدمين الجدد من Google، قد لا يكون لديهم id بعد
+      if (account?.provider === "google") {
+        console.log("✅ Google sign in allowed")
+        return true
+      }
+      
+      if (!user.id) {
+        console.log("❌ No user id")
+        return false
+      }
+      
+      return true
     },
   },
-  adapter: PrismaAdapter(prisma),
-  ...authConfig,
 })

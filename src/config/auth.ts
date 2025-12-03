@@ -2,16 +2,27 @@ import { getUserByEmail } from "@/actions/user"
 import bcryptjs from "bcryptjs"
 import type { NextAuthConfig } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-import GoogleProvider from "next-auth/providers/google"
+import Google from "next-auth/providers/google"
 
 import { signInWithPasswordSchema } from "@/validations/auth"
 
+// Log for debugging
+console.log("🔍 Loading auth config...")
+console.log("🔍 GOOGLE_ID exists:", !!process.env.GOOGLE_ID)
+console.log("🔍 GOOGLE_SECRET exists:", !!process.env.GOOGLE_SECRET)
+
 export default {
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_ID!,
-      clientSecret: process.env.GOOGLE_SECRET!,
-      allowDangerousEmailAccountLinking: true,
+    Google({
+      clientId: process.env.GOOGLE_ID as string,
+      clientSecret: process.env.GOOGLE_SECRET as string,
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
+        },
+      },
     }),
     CredentialsProvider({
       async authorize(rawCredentials) {

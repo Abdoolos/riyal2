@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ريال مايند - OG Image Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #1a1a1a;
+            padding: 20px;
+        }
+
+        .og-container {
+            width: 1200px;
+            height: 630px;
+            background: linear-gradient(135deg, #059669 0%, #f59e0b 100%);
+            border-radius: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Pattern Background */
+        .og-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 60px;
+        }
+
+        .logo {
+            font-size: 120px;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-size: 120px;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 30px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            letter-spacing: -2px;
+        }
+
+        .subtitle {
+            font-size: 48px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 40px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 32px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+        }
+
+        .feature-icon {
+            font-size: 40px;
+        }
+
+        .instructions {
+            margin-top: 40px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 12px;
+            color: white;
+            max-width: 800px;
+        }
+
+        .instructions h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #10b981;
+        }
+
+        .instructions ol {
+            text-align: right;
+            line-height: 2;
+            font-size: 18px;
+        }
+
+        .instructions li {
+            margin-bottom: 10px;
+        }
+
+        .instructions code {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #fbbf24;
+        }
+
+        .button {
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #059669, #f59e0b);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+            transition: transform 0.2s;
+        }
+    </style>
+</head>
+<body>
+    <div style="max-width: 1400px; width: 100%;">
+        <!-- OG Image Preview -->
+        <div class="og-container" id="ogImage">
+            <div class="content">
+                <div class="logo">💰</div>
+                <h1 class="title">ريال مايند</h1>
+                <p class="subtitle">إدارة المصاريف الذكية</p>
+                
+                <div class="features">
+                    <div class="feature">
+                        <span class="feature-icon">📊</span>
+                        <span>تتبع ذكي</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">🎯</span>
+                        <span>أهداف مالية</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">👨‍👩‍👧‍👦</span>
+                        <span>إدارة عائلية</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="instructions">
+            <h2>📸 تعليمات التقاط الصورة:</h2>
+            <ol>
+                <li><strong>اضغط F11</strong> لوضع ملء الشاشة (Full Screen)</li>
+                <li><strong>قم بالتكبير</strong> حتى يملأ المستطيل الأخضر الشاشة تماماً</li>
+                <li><strong>Windows:</strong> اضغط <code>Win + Shift + S</code> والتقط المستطيل فقط</li>
+                <li><strong>Mac:</strong> اضغط <code>Cmd + Shift + 4</code> والتقط المستطيل</li>
+                <li><strong>احفظ الصورة باسم:</strong> <code>og-image.png</code></li>
+                <li><strong>ضع الصورة في:</strong> <code>public/og-image.png</code></li>
+            </ol>
+            
+            <button class="button" onclick="downloadInstructions()">
+                ✅ فهمت، جاهز للالتقاط
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function downloadInstructions() {
+            alert('ممتاز! الآن:\n\n1. اضغط F11 لملء الشاشة\n2. التقط صورة للمستطيل الأخضر فقط\n3. احفظها في: public/og-image.png');
+        }
+
+        // Optional: Log dimensions for verification
+        window.addEventListener('load', () => {
+            const ogImage = document.getElementById('ogImage');
+            console.log('OG Image Dimensions:', {
+                width: ogImage.offsetWidth,
+                height: ogImage.offsetHeight
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,14 +1,17 @@
 {
-  "name": "riyal-mind-saasy-land",
+  "name": "riyal-mind",
   "version": "1.0.0",
-  "description": "Riyal Mind - إدارة المصاريف العائلية مبني على SAASY-LAND",
+  "description": "Riyal Mind - تطبيق ذكي لإدارة المصاريف العائلية",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "db:fix-users": "tsx scripts/fix-users-verification.ts",
+    "db:reset-test": "tsx scripts/reset-test-users.ts",
+    "check:env": "tsx scripts/check-env.ts"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.4.2",
@@ -52,7 +55,9 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "date-fns": "^3.6.0",
+    "dotenv": "^17.2.3",
     "framer-motion": "^11.5.4",
+    "jose": "^6.1.3",
     "lucide-react": "^0.441.0",
     "nanoid": "^5.1.6",
     "next": "^14.2.13",
@@ -79,6 +84,7 @@
     "postcss": "^8.4.47",
     "prisma": "^5.19.1",
     "tailwindcss": "^3.4.12",
+    "tsx": "^4.21.0",
     "typescript": "^5.6.2"
   },
   "engines": {

@@ -1,26 +1,25 @@
 import { type NavItem, type NavItemFooter } from "@/types"
 
 const links = {
-  github:
-    "https://github.com/pjborowiecki/SAASY-LAND-Next-14-Starters-With-Authentication-And-Database-Implemented",
-  twitter: "https://twitter.com/pjborowiecki",
-  linkedin: "https://www.linkedin.com/in/pjborowiecki",
+  github: "",
+  twitter: "",
+  linkedin: "",
   discord: "",
-  authorsWebsite: "https://pjborowiecki.com",
-  authorsGitHub: "https://github.com/pjborowiecki",
-  openGraphImage: "https://saasyland.com/images/opengraph-image.png",
+  authorsWebsite: "",
+  authorsGitHub: "",
+  openGraphImage: "/og-image.png",
 }
 
 export const siteConfig = {
-  name: "SaaSy Land",
+  name: "ريال مايند",
   description:
-    "An open-source starter for Next.js 14 full-stack projects with advanced authentication and several database configurations. The aim of this project is to provide a solid foundation for faster building and launching SaaS products, marketing sites, blogs, and more.",
+    "تطبيق ذكي لإدارة المصاريف العائلية بتقنيات الذكاء الاصطناعي. تتبع مصاريفك، حدد ميزانياتك، وحقق أهدافك المالية بسهولة.",
   links,
-  url: "https://saasyland.com",
+  url: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
   ogImage: links.openGraphImage,
-  author: "pjborowiecki",
+  author: "Riyal Mind Team",
   hostingRegion: "fra1",
-  keywords: ["SaaS", "Next.js", "Template"],
+  keywords: ["إدارة المصاريف", "ميزانية", "مالية", "عائلة", "ذكاء اصطناعي"],
   navItems: [
     {
       title: "About",

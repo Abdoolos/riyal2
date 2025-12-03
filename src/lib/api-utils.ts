@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import { auth } from "@/auth"
+import { ZodError } from "zod"
 
 /**
  * الحصول على session أو إرجاع خطأ 401
@@ -56,6 +57,12 @@ export function validateUserId(userId: string, resourceUserId: string) {
 export function handleApiError(error: unknown) {
   console.error("API Error:", error)
   
+  // Zod validation errors
+  if (error instanceof ZodError) {
+    const firstError = error.errors[0]
+    return errorResponse(firstError.message || "بيانات غير صحيحة", 400)
+  }
+  
   if (error instanceof Error) {
     if (error.message === "Unauthorized") {
       return errorResponse("غير مصرح", 401)
@@ -63,6 +70,11 @@ export function handleApiError(error: unknown) {
     
     if (error.message.includes("غير مصرح")) {
       return errorResponse(error.message, 403)
+    }
+    
+    // Prisma errors
+    if (error.message.includes("Unique constraint")) {
+      return errorResponse("البيانات موجودة مسبقاً", 409)
     }
     
     return errorResponse(error.message, 500)
