@@ -44,6 +44,7 @@ export async function signUpWithPassword(
         email: validatedInput.data.email,
         passwordHash,
         emailVerificationToken,
+        emailVerified: new Date(), // Auto-verify for now (no email service)
       },
     })
 
@@ -87,7 +88,8 @@ export async function signInWithPassword(
     if (!existingUser.email || !existingUser.passwordHash)
       return "incorrect-provider"
 
-    if (!existingUser.emailVerified) return "unverified-email"
+    // Email verification check disabled (auto-verified on signup)
+    // if (!existingUser.emailVerified) return "unverified-email"
 
     await signIn("credentials", {
       email: validatedInput.data.email,

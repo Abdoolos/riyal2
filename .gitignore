@@ -45,3 +45,13 @@ certificates
 
 # notes
 TODO.md
+
+# Environment variable templates with sensitive data
+.env.production.template
+VERCEL_ENV_COPY_PASTE.txt
+vercel-env.json
+vercel-env.csv
+
+# Backend prompts and sensitive documentation
+PROMPT.md
+BACKEND_PROMPT.md
